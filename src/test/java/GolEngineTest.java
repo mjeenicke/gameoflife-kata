@@ -20,7 +20,7 @@ public class GolEngineTest {
   private GolEngine engine;
   private boolean[][] startMatrix = {
           {false, false, false, false, false},
-          {false, true, false, false, false},
+          {false, true, false, false, true},
           {false, false, false, true, false},
           {false, false, false, true, true},
           {true, true, false, false, false}
@@ -29,8 +29,8 @@ public class GolEngineTest {
   private boolean[][] expectedMatrix = {
           {false, false, false, false, false},
           {false, false, false, false, false},
-          {false, false, false, true, false},
-          {false, false, false, true, true},
+          {false, false, true, true, false},
+          {false, false, true, true, true},
           {false, false, false, false, false}
   };
 
@@ -45,7 +45,7 @@ public class GolEngineTest {
   }
 
   @Test
-  public void testFirstRule() {
+  public void testFirstAndSecondRule() {
 
     engine.init(startMatrix);
     System.out.println("vorher:");

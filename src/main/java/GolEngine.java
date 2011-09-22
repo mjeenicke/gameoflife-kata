@@ -19,13 +19,23 @@ public class GolEngine {
     for (int i = 0; i < state.length; i++) {
       boolean[] rows = state[i];
       for (int j = 0; j < rows.length; j++) {
-        applyRuleOne(i, j);
+        applyRules(i, j);
       }
     }
     state = next;
   }
 
-  private void applyRuleOne(int i, int j) {
+  /*
+     Rule 1: Any live cell with fewer than two live neighbours dies,
+   as if caused by underpopulation.
+     Rule 2; Any live cell with more than three live neighbours dies,
+   as if by overcrowding.
+     Rule 3. Any live cell with two or three live neighbours lives on
+   to the next generation.
+     Rule 4. Any dead cell with exactly three live neighbours becomes
+   a live cell.
+   */
+  private void applyRules(int i, int j) {
     int counter = 0;
     for (int x = i - 1; x <= i + 1; x++) {
       for (int y = j - 1; y <= j + 1; y++) {
@@ -37,8 +47,10 @@ public class GolEngine {
         }
       }
     }
-    if (counter >= 2) {
+    if (counter >= 2 && counter < 3) {
       next[i][j] = state[i][j];
+    } else if (counter == 3){
+      next[i][j] = true;
     } else {
       next[i][j] = false;
     }
